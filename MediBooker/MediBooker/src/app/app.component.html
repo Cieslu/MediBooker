@@ -1,0 +1,135 @@
+<header class="border-bottom" style="margin-bottom: 30px;">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home">
+        <img src="../assets/medibooker-heartico-small.png" alt="" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav d-flex">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active"><i
+                class="bi bi-house"></i> Strona główna</a>
+          </li>
+          <li *ngIf="account.roleName == 'Moderator'" class="nav-item">
+            <a class="nav-link" routerLink="/createUser" routerLinkActive="active"><i class="bi bi-person-plus"></i>
+              Dodaj użytkownika</a>
+          </li>
+          <li *ngIf="account.roleName == 'Moderator'" class="nav-item">
+            <a class="nav-link" routerLink="/usersList" routerLinkActive="active"><i class="bi bi-people"></i> Lista
+              użytkowników</a>
+          </li>
+          <!-- <li class="nav-item" *ngIf="account.isLoggedIn">
+            <a class="nav-link" [routerLink]="'/editProfile/' + account.getUserId()" routerLinkActive="active"><i class="bi bi-person-gear"></i> Edytuj profil</a>
+          </li> -->
+          <li class="nav-item" *ngIf="account.isLoggedIn && account.roleName == 'Worker'">
+            <a class="nav-link" routerLink="/createSchedule" routerLinkActive="active"><i
+                class="bi bi-calendar-plus"></i> Stwórz grafik</a>
+          </li>
+          <li class="nav-item" *ngIf="account.isLoggedIn && account.roleName == 'Worker'">
+            <a class="nav-link" routerLink="/schedules" routerLinkActive="active"><i class="bi bi-calendar-week"></i>
+              Lista grafików</a>
+          </li>
+          <li class="nav-item" *ngIf="account.roleName != 'Doctor'">
+            <a class="nav-link" aria-current="page" routerLink="/calendar" routerLinkActive="active"><i
+                class="bi bi-calendar-day"></i> Kalendarz</a>
+          </li>
+          <li class="nav-item" *ngIf="account.roleName == 'Doctor'">
+            <a class="nav-link" aria-current="page" routerLink="/scheduleDoctor" routerLinkActive="active"><i
+                class="bi bi-calendar-day"></i> Grafik</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex">
+          <li *ngIf="account.isLoggedIn == false" class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="router-link-active"><i
+                class="bi bi-box-arrow-in-right"></i> Zaloguj się</a>
+          </li>
+          <li *ngIf="account.isLoggedIn == true" class="nav-item">
+            <div class="dropdown">
+              <a class="nav-link" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <span class="d-flex align-items-center">
+                  Witaj, {{account.userName}}! <img *ngIf="avatar" [src]="avatar" class="rounded-circle ms-1"
+                    style="height: 50px; width: 50px; border: 1px solid black; padding: 2px;" />
+                  <i class="bi bi-caret-down" style="margin-top: 25px;"></i>
+                </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" style="right: 30px;">
+                <li><a class="dropdown-item" [routerLink]="'/editProfile/' + account.getUserId()"><i
+                      class="bi bi-person-gear"></i> Edytuj profil</a></li>
+                <li><a class="dropdown-item" [routerLink]="'/logout'"><i class="bi bi-box-arrow-right"></i> Wyloguj
+                    się</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+  <div class="toast-container position-absolute top-0 end-0 p-3">
+    <div *ngIf="account.toastEditInfo">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie zaktualizowano profil użytkownika!"></app-toast-info>
+    </div>
+    <div *ngIf="account.toastPasswordInfo">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie zaktualizowano hasło użytkownika!"></app-toast-info>
+    </div>
+    <div *ngIf="account.toastDeleteInfo">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie usunięto użytkownika!"></app-toast-info>
+    </div>
+    <div *ngIf="user.toastDeleteReservation">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie anulowano rezerwację wizyty!"></app-toast-info>
+    </div>
+    <div *ngIf="account.toastCreateSchedule">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie dodano dzień do grafiku doktora!"></app-toast-info>
+    </div>
+    <div *ngIf="account.toastDeleteHours">
+      <app-toast-info *ngFor="let toast of account.countToasts"
+        bodyToast="Pomyślnie usunięto godziny pracy z harmonogramu doktora!"></app-toast-info>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="min-height: 60vh;">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="bg-light text-dark py-4 mt-5 border-top" style="min-height: 120px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>MediBooker</h5>
+        <p>Twój system rezerwacji wizyt medycznych</p>
+      </div>
+      <div class="col-md-6">
+        <h5>Skontaktuj się z nami</h5>
+        <ul class="list-unstyled">
+          <li>Telefon: 123-456-789</li>
+          <li>Email: info@medibooker.com</li>
+          <li>Adres: ul. Przykładowa 123, 00-000 Częstochowa</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <hr class="bg-light">
+        <p class="text-center">MediBooker. Wszelkie prawa zastrzeżone.</p>
+        <p class="text-center text-primary">&copy; 2023 Created & Designed by</p>
+        <p class="text-center text-primary fw-bold">
+          <i class="bi bi-person-fill"></i> <a href="https://github.com/Cieslu" target="_blank">Szymon Cieśla</a> &
+          <i class="bi bi-person-fill"></i> <a href="https://github.com/0Ve3te" target="_blank">Szymon Zielonka</a> &
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

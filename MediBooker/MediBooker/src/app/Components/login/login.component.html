@@ -1,0 +1,65 @@
+<!--
+<div class="row justify-content-center">
+  <h1 class="text-center">Logowanie</h1>
+  <div class="col-md-7 bg-light p-5 border border-1">
+      <section>
+          <form id="account" method="post" (ngSubmit)="Signin()">
+              <div class="form-floating mb-3">
+                  <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" [(ngModel)]="login.email" />
+                  <label asp-for="Input.Email" class="form-label">Adres email</label>
+                  <span asp-validation-for="Input.Email" class="text-danger"></span>
+              </div>
+              <div class="form-floating mb-3">
+                  <input asp-for="Input.Password" class="form-control" autocomplete="current-password"aria-required="true"  [(ngModel)]="login.password"/>
+                  <label asp-for="Input.Password" class="form-label">Hasło</label>
+                  <span asp-validation-for="Input.Password" class="text-danger"></span>
+              </div>
+              <div>
+                  <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-dark">Zaloguj się</button>
+              </div>
+              <div class="mt-3">
+                  <p>
+                      <a id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
+                  </p>
+              </div>
+          </form>
+      </section>
+  </div>
+</div> -->
+<div class="row justify-content-center">
+  <div class="col-md-7 p-5 mt-5 border border-1 bg-light">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      Logowanie jest przeznaczone tylko dla pracowników przychodni.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <app-info *ngIf="isRedirectFromFirstEdit" alert="success" content="Twój profil został pomyślnie zaktualizowany! Możesz teraz zalogować się ponownie."></app-info>
+    <h1 class="text-center">Logowanie</h1>
+    <section>
+          <form id="account" method="post" (ngSubmit)="Signin()">
+              <div class="form-floating mb-3">
+                  <input class="form-control" type="email" placeholder="Email" autocomplete="username" aria-required="true" name="email" [(ngModel)]="login.email" required email minlength="5" #email="ngModel"
+                  [ngClass]="{'is-invalid' : email.invalid && (email.dirty || email.touched), 'is-valid' : email.valid}" />
+                  <label class="form-label">Adres email</label>
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                      <span *ngIf="email.errors?.['required']" class="text-danger">Email jest wymagany!</span>
+                    <span *ngIf="email.errors?.['email']" class="text-danger">Email jest niepoprawny!</span>
+                  </div>
+              </div>
+              <div class="form-floating mb-3">
+                  <input class="form-control" type="password" placeholder="Hasło" autocomplete="current-password" aria-required="true" name="password" required [(ngModel)]="login.password" minlength="5" #password="ngModel"
+                  [ngClass]="{'is-invalid' : password.invalid && (password.dirty || password.touched), 'is-valid' : password.valid}"/>
+                  <label class="form-label">Hasło</label>
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                      <span *ngIf="password.errors?.['required']" class="text-danger d-block">Hasło jest wymagane!</span>
+                      <span *ngIf="password.errors?.['minlength']" class="text-danger d-block">Hasło jest za krótkie!</span>
+                    </div>
+                </div>
+                <div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-dark">Zaloguj się</button>
+                </div>
+            </form>
+        </section>
+        <app-info *ngIf="isErrorLogin" alert="danger" content="Błędna próba logowania. Podano nieprawidłowy email lub hasło."></app-info>
+  </div>
+</div>

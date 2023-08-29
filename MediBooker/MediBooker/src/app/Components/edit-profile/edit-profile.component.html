@@ -1,0 +1,188 @@
+<section>
+  <div class="p-5 mt-5 border border-1 bg-light">
+    <form method="put" enctype="multipart/form-data" (ngSubmit)="sendForm()">
+      <div class="text-center border-bottom" *ngIf="!editUserId && isConfirmProfile == 'False'; else noInfo">
+        <h1>Aktualizacja profilu</h1>
+        <div class="alert alert-primary my-4" role="alert">
+          To Twoje pierwsze logowanie, zanim będziesz mógł przejść dalej musisz zaktualizować swój profil.
+        </div>
+      </div>
+      <ng-template #noInfo>
+        <div class="text-center border-bottom">
+          <h1>Edycja profilu</h1>
+        </div>
+      </ng-template>
+
+      <div class="mt-3 row">
+        <div class="form-floating mb-3 col-6">
+          <input class="form-control" placeholder="Imię" required minlength="4" name="imie" #imie="ngModel"
+            [(ngModel)]="profile.name" [pattern]="pattern"
+            [ngClass]="{'is-invalid' : imie.invalid && (imie.dirty || imie.touched), 'is-valid' : imie.valid}" />
+          <label class="form-label ms-2">Imię</label>
+          <div *ngIf="imie.invalid && (imie.dirty || imie.touched)">
+            <span *ngIf="imie.errors?.['required']" class="text-danger">Imię jest wymagane!</span>
+            <span *ngIf="imie.errors?.['minlength']" class="text-danger">Wprowadzone imię jest zbyt krótkie!</span>
+            <span *ngIf="imie.errors?.['pattern'] && profile.name!.length >= 4" class="text-danger">Wprowadzony tekst
+              zawiera znaki numeryczne!</span>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 col-6">
+          <input class="form-control" placeholder="Nazwisko" name="nazwisko" required minlength="4" #nazwisko="ngModel"
+            [(ngModel)]="profile.surname" [pattern]="pattern"
+            [ngClass]="{'is-invalid' : nazwisko.invalid && (nazwisko.dirty || nazwisko.touched), 'is-valid' : nazwisko.valid}" />
+          <label class="form-label ms-2">Nazwisko</label>
+          <div *ngIf="nazwisko.invalid && (nazwisko.dirty || nazwisko.touched)">
+            <span *ngIf="nazwisko.errors?.['required']" class="text-danger">Nazwisko jest wymagane!</span>
+            <span *ngIf="nazwisko.errors?.['minlength']" class="text-danger">Wprowadzone nazwisko jest zbyt
+              krótkie!</span>
+            <span *ngIf="nazwisko.errors?.['pattern'] &&  profile.surname!.length >= 4" class="text-danger">Wprowadzony
+              tekst zawiera znaki numeryczne!</span>
+          </div>
+        </div>
+
+
+        <div class="form-floating mb-3 col-6" *ngIf="isDoctor || profile.getSpecialization()">
+          <input class="form-control" placeholder="Specjalizacja" required minlength="4" name="specialization"
+            #specialization="ngModel" [(ngModel)]="userSpecialization" [pattern]="pattern"
+            [ngClass]="{'is-invalid' : specialization.invalid && (specialization.dirty || specialization.touched), 'is-valid' : specialization.valid}" />
+          <label class="form-label ms-2">Specjalizacja</label>
+          <div *ngIf="specialization.invalid && (specialization.dirty || specialization.touched)">
+            <span *ngIf="specialization.errors?.['required']" class="text-danger">Specjalizacja jest wymagana!</span>
+            <span *ngIf="specialization.errors?.['minlength']" class="text-danger">Wprowadzona specjalizacja jest zbyt
+              krótka!</span>
+            <span *ngIf="specialization.errors?.['pattern'] &&  profile.getSpecialization()!.length >= 4"
+              class="text-danger">Wprowadzony tekst zawiera znaki numeryczne!</span>
+          </div>
+        </div>
+
+        <div class="form-floating mb-3 col-6">
+          <input class="form-control" placeholder="Email" name="email" type="email" #email="ngModel" required email
+            [(ngModel)]="profile.email"
+            [ngClass]="{'is-invalid' : email.invalid && (email.dirty || email.touched), 'is-valid' : email.valid}" />
+          <label class="form-label ms-2">Email</label>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <span *ngIf="email.errors?.['required']" class="text-danger">Email jest wymagany!</span>
+            <span *ngIf="email.errors?.['email']" class="text-danger">Wprowadzony adres email jest nieprawidłowy!</span>
+          </div>
+        </div>
+
+        <!-- <div class="form-floating mb-3 col-6">
+          <input class="form-control" placeholder="Hasło" type="password" name="passwordField" #passwordField="ngModel" required minlength="5" [(ngModel)]="password" />
+          <label class="form-label ms-2">Hasło</label>
+          <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)">
+            <span *ngIf="passwordField.errors?.['required']" class="text-danger">Hasło jest wymagane!</span>
+            <span *ngIf="passwordField.errors?.['minlength']" class="text-danger">Wprowadzone hasło jest zbyt krótkie!</span>
+          </div>
+        </div> -->
+
+        <div class="col-6 mb-3" *ngIf="!editUserId">
+          <div class="input-group">
+            <div class="form-floating">
+              <input class="form-control" placeholder="Hasło" [type]="fieldTextType ? 'text' : 'password'"
+                name="passwordField" required minlength="5" [(ngModel)]="password"
+                [ngClass]="{'is-invalid' : passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched), 'is-valid' : passwordFormControl.valid}"
+                [formControl]="passwordFormControl" />
+              <label for="passwordField">Nowe hasło</label>
+            </div>
+            <span class="input-group-text"><i class="bi bi-eye-slash"
+                [ngClass]="{ 'bi bi-eye-slash' : !fieldTextType, 'bi-eye' : fieldTextType }"
+                (click)="toggleFieldTextType()"></i></span>
+          </div>
+          <div *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+            <span *ngIf="passwordFormControl.errors?.['required']" class="text-danger d-block">Hasło jest
+              wymagane!</span>
+            <span *ngIf="passwordFormControl.errors?.['minlength']" class="text-danger d-block">Wprowadzone hasło jest
+              zbyt
+              krótkie!</span>
+            <span *ngIf="passwordFormControl.errors?.['pattern']" class="text-danger d-block">Hasło musi posiadać co
+              najmniej jedną małą literę, jedną dużą literę, jedną cyfrę, jeden znak specjalny!</span>
+          </div>
+        </div>
+
+        <div class="mb-3 col-12">
+          <input class="form-control file-input" id="exampleFormControlInput1" type="file"
+            (change)="onFileSelected($event)" #fileUpload name="fileUpload" requiredFileType="image/png" required />
+          <div class="file-upload">
+            <span *ngIf="extensionError == true || profile.file == null">Nie wybrano
+              zdjęcia.</span>
+            <span *ngIf="profile.file && extensionError == false">Wybrane zdjęcie: {{profile.file.name}}</span>
+            <button mat-mini-fab type="button" class="upload-btn border-0 rounded-circle ms-2"
+              style="background: #cfe2ff;" (click)="fileUpload.click()">
+              <i class="bi bi-paperclip"></i>
+            </button>
+          </div>
+          <small *ngIf="imageRequiredError && profile.file == null && !editUserId"><i class="bi bi-info-circle"></i>
+            Zdjęcie jest wymagane!</small>
+          <small *ngIf="editUserId"><i class="bi bi-info-circle"></i> Wybierz inne zdjęcie, jeśli chcesz je
+            zmienić.</small>
+
+          <p class="text-danger" *ngIf="extensionError">Nieprawidłowy format pliku!</p>
+        </div>
+
+        <div class="col-12 mb-3" *ngIf="editUserId">
+          <button class="btn btn-primary" type="button" (click)="idFormPasswordChange = !idFormPasswordChange">
+            <i class="bi bi-arrow-up" *ngIf="!idFormPasswordChange"></i><i class="bi bi-arrow-down"
+              *ngIf="idFormPasswordChange"></i>Zmień hasło
+          </button>
+        </div>
+
+        <div *ngIf=" idFormPasswordChange">
+          <div class="col-6 mb-3">
+            <div class="input-group">
+              <div class="form-floating">
+                <input class="form-control" placeholder="Hasło" [type]="fieldTextType1 ? 'text' : 'password'"
+                  name="passwordField1" required minlength="5" [(ngModel)]="newPassword.oldPassword"
+                  [ngClass]="{'is-invalid' : oldPasswordFormControl.invalid && (oldPasswordFormControl.dirty || oldPasswordFormControl.touched), 'is-valid' : oldPasswordFormControl.valid}"
+                  [formControl]="oldPasswordFormControl" />
+                <label for="passwordField1">Stare hasło</label>
+              </div>
+              <span class="input-group-text"><i class="bi bi-eye-slash"
+                  [ngClass]="{ 'bi bi-eye-slash' : !fieldTextType1, 'bi-eye' : fieldTextType1 }"
+                  (click)="toggleFieldTextType1()"></i></span>
+            </div>
+            <div
+              *ngIf="oldPasswordFormControl.invalid && (oldPasswordFormControl.dirty || oldPasswordFormControl.touched)">
+              <span *ngIf="oldPasswordFormControl.errors?.['required']" class="text-danger d-block">Hasło jest
+                wymagane!</span>
+              <span *ngIf="oldPasswordFormControl.errors?.['minlength']" class="text-danger d-block">Wprowadzone hasło
+                jest zbyt
+                krótkie!</span>
+              <span *ngIf="oldPasswordFormControl.errors?.['pattern']" class="text-danger d-block">Hasło musi posiadać
+                co najmniej jedną małą literę, jedną dużą literę, jedną cyfrę, jeden znak specjalny!</span>
+            </div>
+          </div>
+
+          <div class="col-6 mb-3">
+            <div class="input-group">
+              <div class="form-floating">
+                <input class="form-control" placeholder="Hasło" [type]="fieldTextType2 ? 'text' : 'password'"
+                  name="passwordField2" required minlength="5" [(ngModel)]="newPassword.currentPassword"
+                  [ngClass]="{'is-invalid' : passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched), 'is-valid' : passwordFormControl.valid}"
+                  [formControl]="passwordFormControl" />
+                <label for="passwordField2">Nowe hasło</label>
+              </div>
+              <span class="input-group-text"><i class="bi bi-eye-slash"
+                  [ngClass]="{ 'bi bi-eye-slash' : !fieldTextType2, 'bi-eye' : fieldTextType2 }"
+                  (click)="toggleFieldTextType2()"></i></span>
+            </div>
+            <div *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+              <span *ngIf="passwordFormControl.errors?.['required']" class="text-danger d-block">Hasło jest
+                wymagane!</span>
+              <span *ngIf="passwordFormControl.errors?.['minlength']" class="text-danger d-block">Wprowadzone hasło jest
+                zbyt
+                krótkie!</span>
+              <span *ngIf="passwordFormControl.errors?.['pattern']" class="text-danger d-block">Hasło musi posiadać co
+                najmniej jedną małą literę, jedną dużą literę, jedną cyfrę, jeden znak specjalny!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal"data-bs-target="#staticBackdrop">Zapisz</button>
+        </div>
+      </div>
+      <app-modal-info nameAction="Edycja profilu" bodyModal="Czy napewno chcesz edytować profil?"></app-modal-info>
+    </form>
+  </div>
+</section>

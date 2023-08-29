@@ -1,0 +1,38 @@
+<main>
+    <div class="p-5 mt-5 border border-1 bg-light">
+        <div class="text-center mb-5">
+            <h1>Lista wizyt</h1>
+        </div>
+        <div *ngIf="reservations && doctorInfo">
+            <hr>
+            <h4 class="my-3 text-center">Harmonogram pracy doktora <img
+                    src="{{environmentSchedule + doctorInfo.userImg}}" class="rounded-pill ms-2"
+                    style="max-width: 70px;" alt="doctor img"> {{doctorInfo.name}} {{doctorInfo.surname}} w dniu {{date}}.</h4>
+            <table class="table border border-1 table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Od</th>
+                        <th scope="col">Do</th>
+                        <th scope="col">Dane pacjenta</th>
+                        <th scope="col">Adres email</th>
+                        <th scope="col">Rok urodzenia</th>
+                        <th scope="col">Numer telefonu</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="reservationDetailsTab.length > 0">
+                    <tr *ngFor="let day of reservationDetailsTab; let i = index">
+                        <td>{{i+1}}</td>
+                        <td *ngIf="worker.checkHourFormat(day.hoursFrom)">{{day.hoursFrom}}0</td>
+                        <td *ngIf="!worker.checkHourFormat(day.hoursFrom)">{{day.hoursFrom}}</td>
+                        <td *ngIf="worker.checkHourFormat(day.hoursTo)">{{day.hoursTo}}0</td>
+                        <td *ngIf="!worker.checkHourFormat(day.hoursTo)">{{day.hoursTo}}</td>
+                        <td>{{day.name}} {{day.lastName}}</td>
+                        <td>{{day.email}}</td>
+                        <td>{{day.dateOfBirth}}</td>
+                        <td>{{day.phoneNumber}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

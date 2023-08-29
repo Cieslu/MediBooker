@@ -1,0 +1,117 @@
+<main>
+    <div class="p-5 mt-5 border border-1 bg-light">
+        <div class="text-center mb-5">
+            <h1>Tworzenie grafiku pracy</h1>
+        </div>
+        <div class="row justify-content-center" *ngIf="listDoctors.length > 0; else loading">
+            <button class="btn col-1 me-1 fs-3 text-primary" (click)="left()"><i class="bi bi-arrow-left-circle"></i>
+            </button>
+            <div [ngClass]="clickedId == doctor1.id ? 'card mb-3 col-3 p-0 text-white btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark btn btn-primary'"
+                style="max-width: 540px;" *ngIf="doctor1 && doctor1.name != null" (click)="chooseDoctor(doctor1)">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img [src]="environmentSchedule + doctor1.userImg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{doctor1.name}} {{doctor1.surname}}</h5>
+                            <span
+                                [ngClass]="clickedId == doctor1.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor1.specialization}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="clickedId == doctor2.id ? 'card mb-3 col-3 p-0 text-white mx-2 btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark mx-2 btn btn-primary'"
+                style="max-width: 540px;" *ngIf="doctor2 && doctor2.name != null" (click)="chooseDoctor(doctor2)">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img [src]="environmentSchedule + doctor2.userImg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{doctor2.name}} {{doctor2.surname}}</h5>
+                            <span
+                                [ngClass]="clickedId == doctor2.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor2.specialization}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="clickedId == doctor3.id ? 'card mb-3 col-3 p-0 text-white btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark btn btn-primary'"
+                style="max-width: 540px;" *ngIf="doctor3 && doctor3.name != null" (click)="chooseDoctor(doctor3)">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img [src]="environmentSchedule + doctor3.userImg" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{doctor3.name}} {{doctor3.surname}}</h5>
+                            <span
+                                [ngClass]="clickedId == doctor3.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor3.specialization}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn col-1 ms-1 fs-3 text-primary" (click)="right()"><i class="bi bi-arrow-right-circle"></i>
+            </button>
+        </div>
+        <ng-template #loading>
+          <div class="d-flex flex-column align-items-center">
+            <p class="mb-4 fw-bold">Pobieranie listy doktorów...</p>
+            <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+        <form action="post">
+            <div class="mt-3 row justify-content-center">
+                <div class="form-floating mb-3 col-6">
+                    <input class="form-control"
+                        [ngClass]="{'is-invalid' : date.invalid && (date.dirty || date.touched) || dateIsOrdered || wrongDate, 'is-valid' : date.valid}"
+                        type="date" placeholder="Data" name="date" #date="ngModel" [(ngModel)]="day.date" required (ngModelChange)="checkDate(clickedId, day.date)" [disabled]="!clickedId"
+                        />
+                    <label class="form-label ms-2">Data</label>
+                    <span *ngIf="dateIsOrdered" class="text-danger">Lekarz w tym dniu posiada już harmonogram pracy!</span>
+                    <span *ngIf="wrongDate" class="text-danger">Wybrano nieprawidłową datę!</span>
+                    <div *ngIf="date.invalid && (date.dirty || date.touched)">
+                        <span *ngIf="date.errors?.['required']" class="text-danger">Data jest wymagana!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 row justify-content-center">
+                <div class="form-floating mb-3 col-6">
+                    <input class="form-control" [ngClass]="{'is-invalid' : hoursFrom.invalid && (hoursFrom.dirty || hoursFrom.touched) || !isHourFrom, 'is-valid' : hoursFrom.valid}" type="text" placeholder="Godzina rozpoczęcia" name="hoursFrom"
+                        #hoursFrom="ngModel" [(ngModel)]="day.hoursFrom" (ngModelChange)="listHours($event)"
+                        required [disabled]="!clickedId" autocomplete="off"
+                        />
+                    <ul class="list-group">
+                        <li class="list-group-item btn btn-primary" (click)="saveStartHour(hour)"
+                            *ngFor="let hour of newHours">{{hour}}</li>
+                    </ul>
+                    <label class="form-label ms-2">Godzina rozpoczęcia</label>
+                    <span *ngIf="!isHourFrom" class="text-danger">Nie wybrano godziny!</span>
+                    <div *ngIf="hoursFrom.invalid && (hoursFrom.dirty || hoursFrom.touched)">
+                        <span *ngIf="hoursFrom.errors?.['required']" class="text-danger">Godzina rozpoczęcia jest wymagana!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 row justify-content-center">
+                <div class="form-floating mb-3 col-6">
+                    <input class="form-control" [ngClass]="{'is-invalid' : hoursTo.invalid && (hoursTo.dirty || hoursTo.touched) || !isHourTo, 'is-valid' : hoursTo.valid}" type="text" placeholder="Godzina zakończenia" name="hoursTo"
+                        #hoursTo="ngModel" [(ngModel)]="day.hoursTo" (ngModelChange)="listHours2($event)" required [disabled]="!clickedId || !day.hoursFrom" autocomplete="off"/>
+                    <ul class="list-group">
+                        <li class="list-group-item btn btn-primary" (click)="saveEndHour(hour)"
+                            *ngFor="let hour of newHours2">{{hour}}</li>
+                    </ul>
+                    <label class="form-label ms-2">Godzina zakończenia</label>
+                    <span *ngIf="!isHourTo" class="text-danger">Nie wybrano godziny!</span>
+                    <div *ngIf="hoursTo.invalid && (hoursTo.dirty || hoursTo.touched)">
+                        <span *ngIf="hoursTo.errors?.['required']" class="text-danger">Godzina zakończenia jest wymagana!</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-outline-primary" type="button" (click)="createDay()" [disabled]="!day.date || !day.hoursFrom || !day.hoursTo || dateIsOrdered || wrongDate">Zapisz</button>
+        </div>
+    </div>
+</main>
