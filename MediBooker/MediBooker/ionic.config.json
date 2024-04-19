@@ -1,0 +1,7 @@
+{
+  "name": "medi-booker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

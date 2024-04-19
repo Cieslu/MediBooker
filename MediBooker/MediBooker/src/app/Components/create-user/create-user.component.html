@@ -1,0 +1,28 @@
+<div class="container border bg-light border-1 p-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <form (ngSubmit)="createUser()">
+        <div class="mb-3">
+          <app-info *ngIf="completed" alert="primary" [content]="info"></app-info>
+          <label for="role" class="form-label">Rola</label>
+          <select class="form-select" id="role" [(ngModel)]="role" name="role">
+            <option value="" hidden disabled>Wybierz rolę...</option>
+            <option value="doctor">Doktor</option>
+            <option value="worker">Pracownik</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Adres email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" #emailField="ngModel" [(ngModel)]="email" name="email" required email
+          [ngClass]="{'is-invalid' : emailField.invalid && (emailField.dirty || emailField.touched), 'is-valid' : emailField.valid}">
+          <div id="emailHelp" class="form-text">Wprowadź adres email użytkownika.</div>
+          <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)">
+            <span *ngIf="emailField.errors?.['required']" class="text-danger">Email jest wymagany!</span>
+            <span *ngIf="emailField.errors?.['email']" class="text-danger">Wprowadzony adres email jest nieprawidłowy!</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="email == '' || role == '' || emailField.invalid ">Dodaj użytkownika</button>
+      </form>
+    </div>
+  </div>
+</div>

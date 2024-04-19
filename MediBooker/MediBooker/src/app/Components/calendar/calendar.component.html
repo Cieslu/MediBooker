@@ -1,0 +1,70 @@
+<div class="row justify-content-center" *ngIf="listDoctors.length > 0; else loading">
+    <button class="btn col-1 me-1 fs-3 text-primary" (click)="left()"><i class="bi bi-arrow-left-circle"></i>
+    </button>
+    <div [ngClass]="clickedId == doctor1.id ? 'card mb-3 col-3 p-0 text-white btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark btn btn-primary'"
+        style="max-width: 540px;" *ngIf="doctor1 && doctor1.name != null" (click)="chooseDoctor(doctor1)">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="environmentSchedule + doctor1.userImg" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{doctor1.name}} {{doctor1.surname}}</h5>
+                    <span
+                        [ngClass]="clickedId == doctor1.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor1.specialization}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="clickedId == doctor2.id ? 'card mb-3 col-3 p-0 text-white mx-2 btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark mx-2 btn btn-primary'"
+        style="max-width: 540px;" *ngIf="doctor2 && doctor2.name != null" (click)="chooseDoctor(doctor2)">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="environmentSchedule + doctor2.userImg" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{doctor2.name}} {{doctor2.surname}}</h5>
+                    <span
+                        [ngClass]="clickedId == doctor2.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor2.specialization}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [ngClass]="clickedId == doctor3.id ? 'card mb-3 col-3 p-0 text-white btn btn-primary active' : 'card mb-3 col-3 p-0 text-dark btn btn-primary'"
+        style="max-width: 540px;" *ngIf="doctor3 && doctor3.name != null" (click)="chooseDoctor(doctor3)">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img [src]="environmentSchedule + doctor3.userImg" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{doctor3.name}} {{doctor3.surname}}</h5>
+                    <span
+                        [ngClass]="clickedId == doctor3.id ? 'badge bg-success rounded-pill' : 'badge bg-primary rounded-pill'">{{doctor3.specialization}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn col-1 ms-1 fs-3 text-primary" (click)="right()"><i class="bi bi-arrow-right-circle"></i>
+    </button>
+</div>
+<ng-template #loading>
+    <div class="d-flex flex-column align-items-center">
+        <p class="mb-4 fw-bold">Pobieranie listy doktorów...</p>
+        <div class="spinner-border text-primary" style="width: 5rem; height: 5rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>    </svg>
+    <strong>Uwaga!</strong> Rezerwacja wizyty jest możliwa wyłącznie dzień przed planowanym terminem wizyty.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<full-calendar [options]="calendarOptions" class="mt-5"></full-calendar>
+<app-calendar-side-panel [sidePanel]="isSidePanel" (sidePanelEvent)="sidePanelHide($event)"
+    [infoReservation]="infoReservation"></app-calendar-side-panel>

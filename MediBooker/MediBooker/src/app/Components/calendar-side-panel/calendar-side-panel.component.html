@@ -1,0 +1,36 @@
+<!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+    aria-controls="offcanvasScrolling">Enable body scrolling</button> -->
+
+<div [ngClass]="sidePanel ? 'offcanvas offcanvas-end show' : 'offcanvas offcanvas-end'" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Informacje o wizycie</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" (click)="hidePanel()"></button>
+    </div>
+    <div class="offcanvas-body text-center">
+        <div class="">
+            <img class="rounded" [src]="infoReservation.userImg" width="130" alt="">
+        </div>
+        <div class="mt-2 border-bottom border-primary">
+            <h5 class="text-muted">{{infoReservation.sprecialization}}</h5>
+            <h4>{{infoReservation.doctor}}</h4>
+        </div>
+        <div class="mt-5">
+            <p>Wybrany termin: {{infoReservation.data}}</p>
+        </div>
+        <div class="row justify-content-center">
+            <div *ngIf="infoReservation.dayList.length == 0">
+                <div class="alert alert-danger" role="alert">
+                    <p class="fs-5" *ngIf="infoReservation.dayList.length == 0">Brak wolnych miejsc w wybranym terminie! Proszę wybrać inny dzień.</p>
+                </div>
+                <img src="../../../assets/other_termin.png" alt="" width="300">
+            </div>
+            <div class="col-5 p-0 m-1" *ngFor="let day of infoReservation.dayList">
+                <button class="btn btn-outline-primary col-12" [routerLink]="'/reservation/'+day.id" *ngIf="worker.checkHourFormat(day.hoursFrom) == true && worker.checkHourFormat(day.hoursTo) == true">{{day.hoursFrom}}0-{{day.hoursTo}}0</button>
+                <button class="btn btn-outline-primary col-12" [routerLink]="'/reservation/'+day.id" *ngIf="worker.checkHourFormat(day.hoursFrom) == false && worker.checkHourFormat(day.hoursTo) == false">{{day.hoursFrom}}-{{day.hoursTo}}</button>
+                <button class="btn btn-outline-primary col-12" [routerLink]="'/reservation/'+day.id" *ngIf="worker.checkHourFormat(day.hoursFrom) == true && worker.checkHourFormat(day.hoursTo) == false">{{day.hoursFrom}}0-{{day.hoursTo}}</button>
+                <button class="btn btn-outline-primary col-12" [routerLink]="'/reservation/'+day.id" *ngIf="worker.checkHourFormat(day.hoursFrom) == false && worker.checkHourFormat(day.hoursTo) == true">{{day.hoursFrom}}-{{day.hoursTo}}0</button>
+            </div>
+        </div>
+    </div>
+</div>

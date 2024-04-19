@@ -1,0 +1,57 @@
+<main>
+  <div class="p-5 mt-5 border border-1 bg-light">
+    <div class="text-center mb-5">
+      <h1>Lista grafików pracy</h1>
+    </div>
+    <form action="post">
+      <div class="mt-3 row justify-content-center">
+          <div class="form-floating mb-3 col-6">
+            <input class="form-control" type="text" placeholder="doktor" name="doctors" [(ngModel)]="searchDoctor" (ngModelChange)="findDoctor($event)" autocomplete="off" #doctors="ngModel" required [ngClass]="{'is-invalid' : doctors.invalid  && (doctors.dirty || doctors.touched) || !isDoctorChoosen, 'is-valid' : doctors.valid && isDoctorChoosen}" />
+            <label class="form-label ms-2">Podaj dane doktora</label>
+            <span *ngIf="!isDoctorChoosen" class="text-danger">Nie wybrano doktora!</span>
+            <div *ngIf="doctors.invalid && (doctors.dirty || doctors.touched)">
+              <span *ngIf="doctors.errors?.['required']" class="text-danger">Nie wybrano doktora!</span>
+            </div>
+            <ul class="list-group" *ngIf="searchDoctorList.length > 0">
+              <li class="list-group-item btn btn-primary d-flex justify-content-start align-items-center" *ngFor="let doctor of searchDoctorList" (click)="chooseDoctor(doctor)"> <img src="{{serverURL + doctor.userImg}}" class="rounded-pill me-4" style="max-width: 50px;" alt="doctor img"> {{doctor.name}} {{doctor.surname}}</li>
+            </ul>
+          </div>
+          <div class="form-floating mb-3 col-6">
+            <button class="form-control py-2" (click)="findDate()" [disabled]="!choosenDoctorId"><i class="bi bi-arrow-down text-primary"></i> Wybierz datę</button>
+                
+            <ul class="list-group" *ngIf="hideButton">
+              <li class="list-group-item btn btn-primary" *ngFor="let day of searchDaysList" (click)="chooseDay(day)">{{day.date}}</li>
+            </ul>
+          </div>
+      </div>
+    </form>
+    <div *ngIf="choosenDoctorId && (isDateChoosen && choosenDate)">
+      <hr>
+      <h4 class="my-3 text-center">Harmonogram pracy doktora <img src="{{serverURL + choosenDoctorImg}}" class="rounded-pill ms-2" style="max-width: 70px;" alt="doctor img"> {{choosenDoctorName}} w dniu {{choosenDate}}.</h4>
+      <table class="table border border-1 table-striped table-hover">
+      <!-- <table class="table table-primary table-striped border border-1"> -->
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Od</th>
+            <th scope="col">Do</th>
+            <th scope="col">Akcje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let day of tableList; let i = index">
+            <td>{{i+1}}</td>
+            <td *ngIf="worker.checkHourFormat(day.hoursFrom)">{{day.hoursFrom}}0</td>
+            <td *ngIf="!worker.checkHourFormat(day.hoursFrom)">{{day.hoursFrom}}</td>
+            <td *ngIf="worker.checkHourFormat(day.hoursTo)">{{day.hoursTo}}0</td>
+            <td *ngIf="!worker.checkHourFormat(day.hoursTo)">{{day.hoursTo}}</td>
+            <td>
+              <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="deleteingDay = day.id; isDeletingUser = true"><i class="bi bi-person-dash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <app-modal-info [isDeleteUser]="false" [dayId]="deleteingDay" [isDeleteDay]="isDeletingUser" (onDayDeleting)="deleteDay(deleteingDay)" bodyModal="Czy napewno chcesz usunąć tę godzinę pracy?" nameAction="Usunięcie godziny pracy"></app-modal-info>
+</main>

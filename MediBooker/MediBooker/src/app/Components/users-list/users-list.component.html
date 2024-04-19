@@ -1,0 +1,22 @@
+<main>
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let user of listUsers">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold" *ngIf="user.name; else isUser">
+                    <img class="rounded-circle"
+                    style="height: 50px; width: 50px; border: 1px solid black; padding: 2px;"
+                    [src]="serverAddress + user.userImg" />
+                    {{user.name}} {{user.surname}}
+                    <span class="badge bg-primary rounded-pill" *ngIf="user">{{user.getSpecialization()}}</span>
+                    <span class="badge bg-primary rounded-pill" *ngIf="!user.getSpecialization()">Pracownik</span>
+                </div>
+                <ng-template #isUser>
+                    <div class="fw-bold">{{user.email}}</div><span class="fst-italic">Użytkownik niezatwierdzony</span>
+                </ng-template>
+            </div>
+            <button class="btn btn-outline-primary me-1" [routerLink]="'/editProfile/' + user.id" *ngIf="user.name"><i class="bi bi-person-gear"></i></button>
+            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="deletingUser = user.id; isDeletingUser = true"><i class="bi bi-person-dash"></i></button>
+        </li>
+    </ol>
+    <app-modal-info [isDeleteUser]="isDeletingUser" [userId]="deletingUser" (onUserDeleting)="deleteUser(deletingUser)" bodyModal="Czy napewno chcesz usunąć użytkownika?" nameAction="Usunięcie użytkownika"></app-modal-info>
+</main>
