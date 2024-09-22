@@ -1,14 +1,30 @@
 <div align="center">
+  
 # MediBooker
+
 </div>
 
 <div align="right">
+  
 #### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;
 ##### Szymon Cieśla  &emsp;&emsp;&nbsp;
 ##### Szymon Zielonka  &emsp;
+
 </div>
 
+# Technologies Used
+#### Backend:
+- .NET 7.0,
+- C#,
+- Entity Framework Core,
+- MSSQL.
+  
+#### Frontend:
+- Angular 15,
+- Typescript,
+- Bootstrap 5.
 
+# Database
 
 # Application Overview
 
@@ -18,7 +34,7 @@
 > This is the home page for users. Clients don't have to be logged in to use MediBooker.
 <img src="/MediBooker_Photos/home_page.png" alt="home_page_user">
 
-### Booking appointment
+### Booking Appointment
 > The calendar is used to book an appointment with the doctor.
 <img src="/MediBooker_Photos/calendar.png" alt="calendar">
 
