@@ -9,6 +9,29 @@ MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor
 ## Contributors
 - [0Ve3te](https://github.com/0Ve3te)
 
+## Table Of Contents
+1. ##### [Features](#features)
+2. ##### [Technologies Used](#technologies-used)
+3. ##### [Database](#database)
+4. ##### [Application Overview](#application-overview)
+    1. ##### [User Role](#user-role)
+        1. ##### [Home Page](#home-page)
+        2. ##### [Booking Appointment](#booking-appointment)
+        3. ##### [Canceling Appointment](#canceling-appointment)
+    2. ##### [Administrator Role](#administrator-role)
+        1. ##### [Home Page](#home-page-1)
+        2. ##### [Adding User](#adding-user)
+        3. ##### [Users List](#users-list)
+    3. ##### [Doctor Role](#doctor-role)
+        1. ##### [First Logging In](#first-logging-in)
+        2. ##### [Schedule](#schedule)
+    4. ##### [Worker Role](#worker-role)
+        1. ##### [Home Page](#home-page-2)
+        2. ##### [First Logging In](#first-logging-in-1)
+        3. ##### [Creating Schedule](#creating-schedule)
+        4. ##### [Checking Schedule](#checking-schedule)
+    5. ##### [The Notification](#the-notification)
+
 # Features
 - **User Roles:** 🧑‍⚕️ The application supports role-based access control with distinctions between doctors and staff members. Administrators have the authority to create accounts for both doctors and staff.
   
@@ -20,7 +43,8 @@ MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor
   
 - **Email Notifications:** 📧 The app sends users an email after they schedule an appointment, giving them an easy way to cancel if it's necessary.
 
-Token Authentication: 🔒 Security is paramount. The application utilizes token-based authentication to ensure secure access and data protection.
+- **Token Authentication:** 🔒 Security is paramount. The application utilizes token-based authentication to ensure secure access and data protection.
+  
 # Technologies Used
 #### Backend:
 - .NET 7.0,
@@ -69,6 +93,7 @@ Token Authentication: 🔒 Security is paramount. The application utilizes token
 <img src="/MediBooker_Photos/confirmation_mail.png" alt="confirmation_mail">
 </div>
 
+### Canceling Appointment
 > The client can only cancel the visit one day before the scheduled date.
 <img src="/MediBooker_Photos/canceling_visit.png" alt="canceling_visit">
 
@@ -93,7 +118,6 @@ Token Authentication: 🔒 Security is paramount. The application utilizes token
 ### Users List
 > The administrator has access to the users list.
 <img src="/MediBooker_Photos/users_list.png" alt="users_list">
-
 
 ## Doctor Role
 
