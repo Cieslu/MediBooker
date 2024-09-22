@@ -1,54 +1,132 @@
 <div align="center">
-
+  
 # MediBooker
 
 </div>
 
 <div align="right">
-
-#### Autorzy: &emsp;&emsp;&emsp;&nbsp;&nbsp;
-##### Dominik Bobiński  &nbsp;&nbsp;&nbsp;
+  
+#### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;
 ##### Szymon Cieśla  &emsp;&emsp;&nbsp;
 ##### Szymon Zielonka  &emsp;
 
 </div>
 
+# Technologies Used
+#### Backend:
+- .NET 7.0,
+- C#,
+- Entity Framework Core,
+- MSSQL.
+  
+#### Frontend:
+- Angular 15,
+- Typescript,
+- Bootstrap 5.
 
+# Database
+
+# Application Overview
+
+## User Role
+
+### Home Page
+> This is the home page for users. Clients don't have to be logged in to use MediBooker.
+<img src="/MediBooker_Photos/home_page.png" alt="home_page_user">
+
+### Booking Appointment
+> The calendar is used to book an appointment with the doctor.
+<img src="/MediBooker_Photos/calendar.png" alt="calendar">
+
+> This panel shows the available hours for the day that has been chosen after the doctor has been selected.
 <div align="center">
-
-&nbsp;
-
-| Data zajęć | Opis realizowanych zagadnień |
-| --- | --- |
-| 20.02.2023 | CV, Propozycja projektów, Wybór projektu |
-| 27.02.2023 | Harmonogram, Os czasu (kamienie milowe), Dokładny podział obowiązków, Skrócona nazwa bądź nazwa projektu |
-| 06.03.2023 | Zainstalowanie środowiska programistycznego, Stworzenie projektu na GitLabie, Dodanie wszystkich członków zespołu do projektu, Praca nad bannerem, Utworzenie repozytorium |
-| 13.03.2023 | Rozpoczęcie prac nad projektem (Rest API), Stworzenie wzoru dokumentacji, Rozpoczęcie pracy nad systemem roli użytkowników, Praca nad bannerem |
-| 20.03.2023 | Stworzenie bazy danych, Dalsze prace nad rolami użytkowników, Prowadzenie dokumentacji |
-| 27.03.2023 | Testowanie poprawności endpointow w Swaggerze, Połączenie bazy danych z projektem, Prowadzenie dokumentacji |
-| 03.04.2023 | Utworzenie projektu w Angularze, Dodanie polityki Cors, Dalsze prace nad Rest API, Prowadzenie dokumentacji |
-| 17.04.2023 | Rozpoczęcie prac nad widokami, Wstępna koncepcja kalendarza, Prowadzenie dokumentacji |
-| 24.04.2023 | Stworzenie strony użytkownika, Prace nad widokami, Prace nad kalendarzem, Prowadzenie dokumentacji |
-| 08.05.2023 | Stworzenie strony moderatora, Prace nad widokami, Prowadzenie dokumentacji |
-| 15.05.2023 | Stworzenie strony lekarza, Prace nad widokami, Prowadzenie dokumentacji |
-| 22.05.2023 | Stworzenie strony pracownika, Finalizacja pracy nad projektem, Prowadzenie dokumentacjiHarmonogram MediBooker:|
-| 29.05.2023 | Testowanie aplikacji, Prace konserwacyjne, Finalizacja pracy nad projektem, Prowadzenie dokumentacji |
-| 05.06.2023 | Testowanie aplikacji, Prace konserwacyjne, Finalizacja pracy nad projektem, Prowadzenie dokumentacji |
-| 12.06.2023 | Sfinalizowanie dokumentacji, Końcowe zaliczenie projektu |
+<img src="/MediBooker_Photos/information_about_visit.png" alt="information_about_visit">
 </div>
-&nbsp;
 
-# Work Breakdown Structure
+> The user has to complete the form.
+<img src="/MediBooker_Photos/visit_reservation.png" alt="visit_reservation">
 
-&nbsp;
+> Then the system shows the confirmation after the form has been correctly completed.
+<img src="/MediBooker_Photos/visit_confirmation.png" alt="visit_confirmation">
 
+> The email, which contains the visit details, is sent to the user
 <div align="center">
+<img src="/MediBooker_Photos/confirmation_mail.png" alt="confirmation_mail">
+</div>
 
-#### Dominik Bobiński - Developer
-#### Szymon Cieśla - Developer
-#### Szymon Zielonka - Developer
+> The client can only cancel the visit one day before the scheduled date.
+<img src="/MediBooker_Photos/canceling_visit.png" alt="canceling_visit">
 
-&nbsp;
+## Administrator Role
+
+### Home Page
+> This is the home page for users who have the administrator role. They have additional features.
+<img src="/MediBooker_Photos/home_page_admin.png" alt="home_page_admin">
+
+### Adding User
+> An administrator can add a user with the doctor or worker role.
+<img src="/MediBooker_Photos/adding_doctor_or_worker.png" alt="adding_doctor_or_worker">
+
+> The notification after adding a user. 
+<img src="/MediBooker_Photos/added_doctor_or_worker.png" alt="added_doctor_or_worker">
+
+> The email informs that a user has been added. This notice includes the username and password, which the user can to use log in.
+<div align="center">
+<img src="/MediBooker_Photos/added_doctor_or_worker_email.png" alt="added_doctor_or_worker_email">
+</div>
+
+### Users List
+> The administrator has access to the users list.
+<img src="/MediBooker_Photos/users_list.png" alt="users_list">
 
 
+## Doctor Role
+
+### Home Page
+> This is the home page for users who have the doctor role. They have additional features.
+<img src="/MediBooker_Photos/home_page_doctor.png" alt="home_page_doctor">
+
+### First Logging In
+> The doctor has to edit their profile when logging in for the first time.
+<img src="/MediBooker_Photos/first_edit_doctor.png" alt="first_edit_doctor">
+
+> The user will be logged out after the first edit.
+<div align="center">
+<img src="/MediBooker_Photos/after_first_edit.png" alt="after_first_edit">
+</div>
+
+### Schedule
+> The doctor can check their own appointments on the calendar.
+<img src="/MediBooker_Photos/doctor_schedule_1.png" alt="doctor_schedule_1">
+
+> The details for the selected day.
+<img src="/MediBooker_Photos/visit_list.png" alt="visit_list">
+
+## Worker Role
+
+### Home Page
+> This is the home page for users who have the worker role. They have additional features.
+<img src="/MediBooker_Photos/home_page_worker.png" alt="home_page_worker">
+
+### First Logging In
+> The worker has to edit their profile when logging in for the first time.
+<img src="/MediBooker_Photos/first_edit_worker.png" alt="first_edit_worker">
+
+> The user will be logged out after the first edit.
+<div align="center">
+<img src="/MediBooker_Photos/after_first_edit.png" alt="after_first_edit">
+</div>
+
+### Creating Schedule
+> The worker creates a schedule for the doctors.
+<img src="/MediBooker_Photos/creating_visit.png" alt="creating_visit">
+
+### Checking Schedule
+> The worker can check the doctor's schedule and can delete selected visits from the schedule.
+<img src="/MediBooker_Photos/doctor_schedule_worker.png" alt="doctor_schedule_worker">
+
+## The Notification
+> Here is an example notification that is shown after each operation is completed.
+<div align="center">
+<img src="/MediBooker_Photos/notification_creating_visit.png" alt="notification_creating_visit">
 </div>
