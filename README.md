@@ -36,7 +36,9 @@
 <img src="/MediBooker_Photos/visit_confirmation.png" alt="visit_confirmation">
 
 > The email, which contains the visit details, is sent to the user
+<div align="center">
 <img src="/MediBooker_Photos/confirmation_mail.png" alt="confirmation_mail">
+</div>
 
 > The client can only cancel the visit one day before the scheduled date.
 <img src="/MediBooker_Photos/canceling_visit.png" alt="canceling_visit">
@@ -55,7 +57,9 @@
 <img src="/MediBooker_Photos/added_doctor_or_worker.png" alt="added_doctor_or_worker">
 
 > The email informs that a user has been added. This notice includes the username and password, which the user can to use log in.
+<div align="center">
 <img src="/MediBooker_Photos/added_doctor_or_worker_email.png" alt="added_doctor_or_worker_email">
+</div>
 
 ### Users List
 > The administrator has access to the users list.
@@ -73,7 +77,9 @@
 <img src="/MediBooker_Photos/first_edit_doctor.png" alt="first_edit_doctor">
 
 > The user will be logged out after the first edit.
+<div align="center">
 <img src="/MediBooker_Photos/after_first_edit.png" alt="after_first_edit">
+</div>
 
 ### Schedule
 > The doctor can check their own appointments on the calendar.
@@ -93,7 +99,9 @@
 <img src="/MediBooker_Photos/first_edit_worker.png" alt="first_edit_worker">
 
 > The user will be logged out after the first edit.
+<div align="center">
 <img src="/MediBooker_Photos/after_first_edit.png" alt="after_first_edit">
+</div>
 
 ### Creating Schedule
 > The worker creates a schedule for the doctors.
@@ -105,4 +113,6 @@
 
 ## The Notification
 > Here is an example notification that is shown after each operation is completed.
+<div align="center">
 <img src="/MediBooker_Photos/notification_creating_visit.png" alt="notification_creating_visit">
+</div>
