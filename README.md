@@ -4,9 +4,14 @@
 
 </div>
 
+MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor appointments. With its user-friendly interface and helpful features, it makes booking appointments simple, ensuring a seamless experience for both doctors and patients.
+
+</br>
+</br>
+
 <div align="right">
   
-#### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;
+#### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
 ##### Szymon Cieśla  &emsp;&emsp;&nbsp;
 ##### Szymon Zielonka  &emsp;
 
@@ -25,6 +30,7 @@
 - Bootstrap 5.
 
 # Database
+<img src="/MediBooker_Photos/database.png" alt="database">
 
 # Application Overview
 
