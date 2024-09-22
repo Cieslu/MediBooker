@@ -10,8 +10,8 @@ MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor
 - [0Ve3te](https://github.com/0Ve3te)
 
 ## Table Of Contents
-1. ##### [Features](#features)
-2. ##### [Technologies Used](#technologies-used)
+1. ##### [Features](#features-1)
+2. ##### [Technologies Used](#technologies-used-1)
 3. ##### [Database](#database)
 4. ##### [Application Overview](#application-overview)
     1. ##### [User Role](#user-role)
