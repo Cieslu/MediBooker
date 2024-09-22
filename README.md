@@ -11,22 +11,31 @@ MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor
 
 # Features
 - **User Roles:** 🧑‍⚕️ The application supports role-based access control with distinctions between doctors and staff members. Administrators have the authority to create accounts for both doctors and staff.
+  
 - **Doctor Scheduling:** 📅 Staff members can manage doctors' work schedules and set their working hours according to the needs.
+  
 - **Interactive Calendar:** 🗓️ Users can easily browse through an interactive calendar to choose the date and doctor they prefer for booking appointments.
+  
 - **Reservation Form:** ✍️ A simple yet user-friendly form makes it easy for users to schedule appointments.
+  
 - **Email Notifications:** 📧 The app sends users an email after they schedule an appointment, giving them an easy way to cancel if it's necessary.
 
 Token Authentication: 🔒 Security is paramount. The application utilizes token-based authentication to ensure secure access and data protection.
 # Technologies Used
 #### Backend:
 - .NET 7.0,
+  
 - C#,
+  
 - Entity Framework Core,
+  
 - MSSQL.
   
 #### Frontend:
 - Angular 15,
+  
 - Typescript,
+  
 - Bootstrap 5.
 
 # Database
