@@ -6,16 +6,8 @@
 
 MediBooker 🧑‍⚕️ is your top choice for easy online scheduling of doctor appointments. With its user-friendly interface and helpful features, it makes booking appointments simple, ensuring a seamless experience for both doctors and patients.
 
-</br>
-</br>
-
-<div align="right">
-  
-#### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-##### Szymon Cieśla  &emsp;&emsp;&nbsp;
-##### Szymon Zielonka  &emsp;
-
-</div>
+## Contributors
+- [0Ve3te](https://github.com/0Ve3te)
 
 # Technologies Used
 #### Backend:
