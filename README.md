@@ -1,16 +1,14 @@
 <div align="center">
-
 # MediBooker
-
 </div>
 
 <div align="right">
-  
 #### Authors: &emsp;&emsp;&emsp;&nbsp;&nbsp;
 ##### Szymon Cieśla  &emsp;&emsp;&nbsp;
 ##### Szymon Zielonka  &emsp;
-
 </div>
+
+
 
 # Application Overview
 
